@@ -1,5 +1,5 @@
 CREATE TABLE customer (
-    PRIMARY KEY (custoemr_id),
+    PRIMARY KEY (customer_id),
     FOREIGN KEY (agent_id)  REFERENCES agent(agent_id),
     FOREIGN KEY (person_id) REFERENCES person(person_id)
     customer_id INT NOT NULL,
