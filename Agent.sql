@@ -3,6 +3,7 @@ CREATE DATABASE agents;
 
 CREATE TABLE agent(
   agent_id int PRIMARY KEY NOT NULL,
-  name varchar(255) NOT NULL DEFAULT ' ',
-  customer_count int DEFAULT '0'
+  person_id int NOT NULL,
+  customer_count int DEFAULT '0',
+  FOREIGN KEY (person_id) REFERENCES person(person_id)
 );
