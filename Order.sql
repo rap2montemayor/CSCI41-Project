@@ -3,16 +3,25 @@ DROP DATABASE orders;
 CREATE DATABASE orders;
 
 CREATE TABLE order(
-  order_number int PRIMARY KEY NOT NULL,
-  customer_id int,
-  agent_id int,  
-  amount_due float(2) DEFAULT 0.00,
-  dt DATE NOT NULL FORMAT 'mm.dd.yyyy',
+  order_id int PRIMARY KEY NOT NULL,
+  agent_id int FOREIGN KEY references agent(agent_id),
+  customer_id int FOREIGN KEY references customer(customer_id),
+  amount_due int NOT NULL DEFAULT 0,
+  order_date date NOT NULL,
   delivery_address varchar(255) NOT NULL DEFAULT ' ',
-  gift bit DEFAULT 0, -- 0 if false, 1 if true bc there no booleans apparently
-  recipient varchar(255) NOT NULL DEFAULT ' ',
-  FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
-  FOREIGN KEY (agent_id) REFERENCES agent(agent_id),
-  CHECK 
-   (gift IN (0,1))
+  gift boolean NOT NULL,
 );
+
+CREATE TABLE ordered_product(
+  order_id int NOT NULL FOREIGN KEY references order(order_id),
+  product_id int NOT NULL FOREIGN KEY references product(product_id),
+  personalization varchar(255) NOT NULL,
+  discount int NOT NULL DEFAULT 0,
+  quantity int NOT NULL DEFAULT 0
+);
+
+CREATE TABLE order_recipient(
+  order_id int FOREIGN KEY references order(order_number),
+  person_id int FOREIGN KEY references person(person_id)
+);
+
