@@ -24,3 +24,4 @@ CREATE TABLE order_recipient(
   order_id int FOREIGN KEY references order(order_number),
   person_id int FOREIGN KEY references person(person_id)
 );
+
