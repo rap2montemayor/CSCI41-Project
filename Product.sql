@@ -31,6 +31,8 @@ CREATE TABLE product_dimensional(
 CREATE TABLE product_color_stock(
     FOREIGN KEY (product_id) references product(product_id),
     product_id INT NOT NULL,
-    color VARCHAR(255) NOT NULL,
+    color VARCHAR(20) NOT NULL,
     stock INT NOT NULL,
+	CHECK
+	(color IN ('red', 'orange', 'yellow', 'green', 'blue', 'purple', 'pink', 'black'))
 );
