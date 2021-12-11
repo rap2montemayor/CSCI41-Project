@@ -1,16 +1,36 @@
-DROP DATABASE Products;
-
-CREATE DATABASE Products;
-
 CREATE TABLE product(
-	product_number int PRIMARY KEY NOT NULL,
-	category varchar(20),
-	color VARCHAR(20) NOT NULL DEFAULT 'Black',
-	features varchar(255) NOT NULL DEFAULT ' ',
-	product_name varchar(50) NOT NULL DEFAULT '<EMPTY>',
-	product_price FLOAT(2),
-	stock INT DEFAULT 0,
-	product_type --idk how to this one
-	CHECK
-	 (category IN ('Office', 'Health', 'Sports', 'Child Care', 'Digital Devices'))
+    PRIMARY KEY (product_id),
+    product_id INT NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
+    personalization_limit INT NOT NULL,
+    price NUMERIC(19, 2) NOT NULL,
+    product_type VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE product_features(
+    FOREIGN KEY (product_id) references product(product_id),
+    product_id INT NOT NULL,
+    feature VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE product_slotted(
+    FOREIGN KEY (product_id) references product(product_id),
+    product_id INT NOT NULL,
+    slots INT NOT NULL,
+);
+
+CREATE TABLE product_dimensional(
+    FOREIGN KEY (product_id) references product(product_id),
+    product_id INT NOT NULL,
+    height INT NOT NULL,
+    length INT NOT NULL,
+    width INT NOT NULL,
+);
+
+CREATE TABLE product_color_stock(
+    FOREIGN KEY (product_id) references product(product_id),
+    product_id INT NOT NULL,
+    color VARCHAR(255) NOT NULL,
+    stock INT NOT NULL,
 );
