@@ -1,27 +1,30 @@
-DROP DATABASE orders;
-
-CREATE DATABASE orders;
-
-CREATE TABLE order(
-  order_id int PRIMARY KEY NOT NULL,
-  agent_id int FOREIGN KEY references agent(agent_id),
-  customer_id int FOREIGN KEY references customer(customer_id),
-  amount_due int NOT NULL DEFAULT 0,
-  order_date date NOT NULL,
-  delivery_address varchar(255) NOT NULL DEFAULT ' ',
-  gift boolean NOT NULL,
+CREATE TABLE order (
+    PRIMARY KEY (order_id),
+    FOREIGN KEY (agent_id)    REFERENCES agent(agent_id),
+    FOREIGN KEY (customer_id) REFERENCES customer(customer_id),
+    order_id         INT          NOT NULL,
+    agent_id         INT          NOT NULL,
+    customer_id      INT          NOT NULL,
+    amount_due       INT          NOT NULL DEFAULT 0,
+    order_date       DATE         NOT NULL,
+    delivery_address VARCHAR(255) NOT NULL DEFAULT ' ',
+    gift             BOOLEAN      NOT NULL,
 );
 
-CREATE TABLE ordered_product(
-  order_id int NOT NULL FOREIGN KEY references order(order_id),
-  product_id int NOT NULL FOREIGN KEY references product(product_id),
-  personalization varchar(255) NOT NULL,
-  discount int NOT NULL DEFAULT 0,
-  quantity int NOT NULL DEFAULT 0
+CREATE TABLE ordered_product (
+    FOREIGN KEY (order_id)   REFERENCES order(order_id),
+    FOREIGN KEY (product_id) REFERENCES product(product_id),
+    order_id        INT          NOT NULL,
+    product_id      INT          NOT NULL,
+    discount        INT          NOT NULL DEFAULT 0,
+    personalization VARCHAR(255) NOT NULL,
+    quantity        INT          NOT NULL DEFAULT 0
 );
 
-CREATE TABLE order_recipient(
-  order_id int FOREIGN KEY references order(order_number),
-  person_id int FOREIGN KEY references person(person_id)
+CREATE TABLE order_recipient (
+    FOREIGN KEY (order_id)  REFERENCES order(order_number),
+    FOREIGN KEY (person_id) REFERENCES person(person_id),
+    order_id  INT NOT NULL,
+    person_id INT NOT NULL,
 );
 
