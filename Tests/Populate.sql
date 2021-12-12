@@ -1,12 +1,20 @@
 INSERT INTO person (person_id, name)
 VALUES (1001, 'Diluc Ragnvindr'),
-       (1002, 'Venti');
+       (1002, 'Venti'),
+       (1003, 'Victor Magtanggol'),
+       (1004, 'Maria Ressa'),
+       (1005, 'Osana Azuma'),
+       (1006, 'Hoh Lee');
 
 INSERT INTO agent (agent_id, person_id, customer_count)
-VALUES (2001, 1001, 0);
+VALUES (2001, 1001, 0),
+       (2010, 1002, 0),
+       (2002, 1003, 20);
 
 INSERT INTO customer (customer_id, agent_id, person_id)
-VALUES (3002, 2001, 1002);
+VALUES (3002, 2001, 1002),
+       (3004, 2010, 1004),
+       (3006, 2002, 1006);
 
 INSERT INTO product (product_id, category, name, personalization_limit, price)
 VALUES (4001, 'planners', 'yung ninakaw na notebook ni albedo', 30, 12345),
