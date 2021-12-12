@@ -58,7 +58,7 @@ VALUES (5001, 2001, 3002, 20000, '2021-12-12', 'Windrise Tree', false),
 
 INSERT INTO ordered_product (order_id, product_id, discount, personalization, quantity)
 VALUES (5001, 4002, 0, 'XxBarbatosxX', 1),
-       (5002, 4003, 0, 'Cloud_Strife');
+       (5002, 4003, 0, 'Cloud_Strife', 1);
 
 INSERT INTO order_recipient (order_id, person_id)
 VALUES (5001, 1002),
