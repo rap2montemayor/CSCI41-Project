@@ -3,8 +3,8 @@ files = [
 	'Person.sql',
 	'Agent.sql',
 	'Customer.sql',
+	'Product.sql',
 	'Order.sql',
-	'Product.sql'
 ]
 
 with open('a.sql', mode='w', encoding='utf-8') as output:
