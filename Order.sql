@@ -5,7 +5,6 @@ CREATE TABLE orders (
     order_id         INT            NOT NULL,
     agent_id         INT            NOT NULL,
     customer_id      INT            NOT NULL,
-    amount_due       NUMERIC(16, 2) NOT NULL, -- derived; consider deleting
     delivery_address VARCHAR(127)   NOT NULL,
     gift             BOOLEAN        NOT NULL DEFAULT FALSE,
     order_date       DATE           NOT NULL,

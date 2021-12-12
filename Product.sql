@@ -40,7 +40,7 @@ CREATE TABLE product_color_stock (
     FOREIGN KEY (product_id) REFERENCES product(product_id),
     product_id INT          NOT NULL,
     color      VARCHAR(7)   NOT NULL,
-    stock      INT          NOT NULL
+    stock      INT          NOT NULL,
     CHECK (color IN ('red', 'orange', 'yellow', 'green',
-                     'blue', 'purple', 'pink', 'black')),
+                     'blue', 'purple', 'pink', 'black'))
 );
