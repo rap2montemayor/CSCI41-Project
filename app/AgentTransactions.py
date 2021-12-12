@@ -47,10 +47,8 @@ class AgentTransactions(tk.Frame):
         self.cursor.execute(f'''
             SELECT order_id, order_date, agent_info.name, customer_info.name, order_id
               FROM orders
-                   JOIN customer
-                     ON customer.customer_id = orders.customer_id
-                   JOIN agent
-                     ON agent.agent_id = orders.agent_id
+                   JOIN customer ON customer.customer_id = orders.customer_id
+                   JOIN agent ON agent.agent_id = orders.agent_id
                    JOIN person AS customer_info
                      ON customer_info.person_id = customer.person_id
                    JOIN person AS agent_info
@@ -62,10 +60,9 @@ class AgentTransactions(tk.Frame):
 
     def query_due(self, order_id):
         self.cursor.execute(f'''
-            SELECT product.price-product.price*discount*0.01
+            SELECT SUM(quantity*(product.price-product.price*discount*0.01))
               FROM ordered_product
-                   JOIN product
-                     ON product.product_id = ordered_product.product_id
+                   JOIN product ON product.product_id = ordered_product.product_id
              WHERE order_id = {order_id};
         ''')
         return float(self.cursor.fetchall()[0][0])

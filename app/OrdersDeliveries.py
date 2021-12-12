@@ -35,20 +35,6 @@ class OrdersDeliveries(tk.Frame):
         order_id = self.orders[self.current_order]
         order_info = tk.Frame(self.contents)
 
-        products_info = tk.Frame(self.contents)
-        products = self.query_products(order_id)
-        for idx, column in enumerate(['Item', 'Description', 'Qty', 'SRP', 'Discount', 'Total']):
-            tk.Label(products_info, text=column).grid(row=0, column=idx)
-
-        amount_due = 0
-        for row, row_contents in enumerate(self.query_products(order_id)):
-            product, color, personalization, qty, srp, discount, total = row_contents
-            description = f'Color: {color}\nPersonalization: {personalization}'
-            amount_due += float(total)
-            for col, col_contents in enumerate([product, description, qty, srp, discount, f'{float(total):.2f}']):
-                tk.Label(products_info, text=f'{col_contents}').grid(row=row+1, column=col)
-
-
         recipients = '/'.join(self.query_recipients(order_id))
         customer, address, schedule, gift, date, agent = self.query_order(order_id)
         tk.Label(order_info, text=f'Customer: {customer}').grid(row=0, column=0)
@@ -59,19 +45,28 @@ class OrdersDeliveries(tk.Frame):
         tk.Label(order_info, text=f'Order No.: {order_id}').grid(row=0, column=1)
         tk.Label(order_info, text=f'Date: {date}').grid(row=1, column=1)
         tk.Label(order_info, text=f'Agent: {agent}').grid(row=2, column=1)
-        tk.Label(order_info, text=f'Amount Due: {amount_due:.2f}').grid(row=3, column=1)
+        tk.Label(order_info, text=f'Amount Due: {self.query_due(order_id):.2f}').grid(row=3, column=1)
 
         order_info.pack()
+
+        products_info = tk.Frame(self.contents)
+        for idx, column in enumerate(['Item', 'Description', 'Qty', 'SRP', 'Discount', 'Total']):
+            tk.Label(products_info, text=column).grid(row=0, column=idx)
+
+        for row, row_contents in enumerate(self.query_products(order_id)):
+            product, color, personalization, qty, srp, discount, total = row_contents
+            description = f'Color: {color}\nPersonalization: {personalization}'
+            for col, col_contents in enumerate([product, description, qty, srp, discount, f'{float(total):.2f}']):
+                tk.Label(products_info, text=f'{col_contents}').grid(row=row+1, column=col)
+
         products_info.pack()
 
     def query_order(self, order_id):
         self.cursor.execute(f'''
             SELECT customer_info.name, delivery_address, schedule, gift, order_date, agent_info.name
               FROM orders
-                   JOIN customer
-                     ON customer.customer_id = orders.customer_id
-                   JOIN agent
-                     ON agent.agent_id = orders.agent_id
+                   JOIN customer ON customer.customer_id = orders.customer_id
+                   JOIN agent ON agent.agent_id = orders.agent_id
                    JOIN person AS customer_info
                      ON customer_info.person_id = customer.person_id
                    JOIN person AS agent_info
@@ -84,21 +79,29 @@ class OrdersDeliveries(tk.Frame):
         self.cursor.execute(f'''
             SELECT recipient.name
               FROM order_recipient
-                   JOIN person as recipient
-                     ON recipient.person_id = order_recipient.person_id
+                   JOIN person as recipient ON recipient.person_id = order_recipient.person_id
              WHERE order_id = {order_id};
         ''')
         return [i[0] for i in self.cursor.fetchall()]
 
     def query_products(self, order_id):
         self.cursor.execute(f'''
-            SELECT product.name, color, personalization, quantity, product.price, discount, product.price-product.price*discount*0.01
+            SELECT product.name, color, personalization, quantity, product.price, discount,
+                   quantity*(product.price-product.price*discount*0.01)
               FROM ordered_product
-                   JOIN product
-                     ON product.product_id = ordered_product.product_id
+                   JOIN product ON product.product_id = ordered_product.product_id
              WHERE order_id = {order_id};
         ''')
         return self.cursor.fetchall()
+
+    def query_due(self, order_id):
+        self.cursor.execute(f'''
+            SELECT SUM(quantity*(product.price-product.price*discount*0.01))
+              FROM ordered_product
+                   JOIN product ON product.product_id = ordered_product.product_id
+             WHERE order_id = {order_id};
+        ''')
+        return float(self.cursor.fetchall()[0][0])
 
     def pack(self):
         super().pack()
