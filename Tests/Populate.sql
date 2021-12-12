@@ -4,17 +4,20 @@ VALUES (1001, 'Diluc Ragnvindr'),
        (1003, 'Victor Magtanggol'),
        (1004, 'Maria Ressa'),
        (1005, 'Osana Azuma'),
-       (1006, 'Hoh Lee');
+       (1006, 'Hoh Lee'),
+       (1007, 'Yoshi P.');
 
 INSERT INTO agent (agent_id, person_id, customer_count)
 VALUES (2001, 1001, 0),
        (2010, 1002, 0),
-       (2002, 1003, 20);
+       (2002, 1003, 20),
+       (2020, 1007, 0);
 
 INSERT INTO customer (customer_id, agent_id, person_id)
 VALUES (3002, 2001, 1002),
        (3004, 2010, 1004),
-       (3006, 2002, 1006);
+       (3006, 2002, 1006),
+       (3008, 2020, 1007);
 
 INSERT INTO product (product_id, category, name, personalization_limit, price)
 VALUES (4001, 'planners', 'yung ninakaw na notebook ni albedo', 30, 12345),
@@ -50,10 +53,13 @@ VALUES (4001, 'red', 3),
        (4003, 'red', 8);
 
 INSERT INTO orders (order_id, agent_id, customer_id, amount_due, order_date, delivery_address, gift)
-VALUES (5001, 2001, 3002, 20000, '2021-12-12', 'Windrise Tree', false);
+VALUES (5001, 2001, 3002, 20000, '2021-12-12', 'Windrise Tree', false),
+       (5002, 2020, 3008, 12300, '2021-12-12', 'Loyola Heights', false);
 
 INSERT INTO ordered_product (order_id, product_id, discount, personalization, quantity)
-VALUES (5001, 4002, 0, 'XxBarbatosxX', 1);
+VALUES (5001, 4002, 0, 'XxBarbatosxX', 1),
+       (5002, 4003, 0, 'Cloud_Strife');
 
 INSERT INTO order_recipient (order_id, person_id)
-VALUES (5001, 1002);
+VALUES (5001, 1002),
+       (5002, 1007);
