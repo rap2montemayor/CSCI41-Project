@@ -7,6 +7,7 @@ CREATE TABLE orders (
     customer_id      INT            NOT NULL,
     amount_due       NUMERIC(19, 2) NOT NULL DEFAULT 0,
     order_date       DATE           NOT NULL,
+    schedule         DATE           NOT NULL,
     delivery_address VARCHAR(255)   NOT NULL DEFAULT ' ',
     gift             BOOLEAN        NOT NULL
 );
@@ -18,6 +19,7 @@ CREATE TABLE ordered_product (
     product_id      INT          NOT NULL,
     discount        INT          NOT NULL DEFAULT 0,
     personalization VARCHAR(255) NOT NULL,
+    color           VARCHAR(255) NOT NULL,
     quantity        INT          NOT NULL DEFAULT 0
 );
 

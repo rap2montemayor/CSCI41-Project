@@ -52,13 +52,13 @@ VALUES (4001, 'red', 3),
        (4003, 'black', 6),
        (4003, 'red', 8);
 
-INSERT INTO orders (order_id, agent_id, customer_id, amount_due, order_date, delivery_address, gift)
-VALUES (5001, 2001, 3002, 20000, '2021-12-12', 'Windrise Tree', false),
-       (5002, 2020, 3008, 12300, '2021-12-12', 'Loyola Heights', false);
+INSERT INTO orders (order_id, agent_id, customer_id, amount_due, order_date, schedule, delivery_address, gift)
+VALUES (5001, 2001, 3002, 20000, '2021-12-12', '2022-1-4', 'Windrise Tree', false),
+       (5002, 2020, 3008, 12300, '2021-12-12', '2022-1-10', 'Loyola Heights', false);
 
-INSERT INTO ordered_product (order_id, product_id, discount, personalization, quantity)
-VALUES (5001, 4002, 0, 'XxBarbatosxX', 1),
-       (5002, 4003, 0, 'Cloud_Strife', 1);
+INSERT INTO ordered_product (order_id, product_id, discount, personalization, color, quantity)
+VALUES (5001, 4002, 0, 'XxBarbatosxX', 'blue', 1),
+       (5002, 4003, 0, 'Cloud_Strife', 'red', 1);
 
 INSERT INTO order_recipient (order_id, person_id)
 VALUES (5001, 1002),
