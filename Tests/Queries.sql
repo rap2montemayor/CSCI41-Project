@@ -8,7 +8,7 @@ WHERE a.person_id = p.person_id;
 SELECT c.customer_id, a.agent_id, o.order_id
 FROM customer c, agent a, orders o
 WHERE c.customer_id = o.customer_id
-AND a.agent_id = o.agent_id
+AND a.agent_id = o.agent_id;
 
 SELECT *
 FROM product_pen_organizers;
