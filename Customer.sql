@@ -1,10 +1,8 @@
-DROP DATABASE customers;
-CREATE DATABASE customers;
-
-CREATE TABLE customer(
-  customer_id int PRIMARY KEY NOT NULL,
-  person_id int NOT NULL,
-  agent_id int NOT NULL,
-  FOREIGN KEY (agent_id) REFERENCES agent(agent_id),
-  FOREIGN KEY (person_id) REFERENCES person(person_id)
+CREATE TABLE customer (
+    PRIMARY KEY (customer_id),
+    FOREIGN KEY (agent_id)  REFERENCES agent(agent_id),
+    FOREIGN KEY (person_id) REFERENCES person(person_id),
+    customer_id INT NOT NULL,
+    agent_id    INT NOT NULL,
+    person_id   INT NOT NULL
 );

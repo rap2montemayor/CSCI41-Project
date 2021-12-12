@@ -1,9 +1,7 @@
-DROP DATABASE agents;
-CREATE DATABASE agents;
-
-CREATE TABLE agent(
-  agent_id int PRIMARY KEY NOT NULL,
-  person_id int NOT NULL,
-  customer_count int DEFAULT '0',
-  FOREIGN KEY (person_id) REFERENCES person(person_id)
+CREATE TABLE agent (
+    PRIMARY KEY (agent_id),
+    FOREIGN KEY (person_id) REFERENCES person(person_id),
+    agent_id       int NOT NULL,
+    person_id      int NOT NULL,
+    customer_count int NOT NULL DEFAULT 0
 );
