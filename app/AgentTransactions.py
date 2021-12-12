@@ -38,12 +38,14 @@ class AgentTransactions(tk.Frame):
             tk.Label(self.contents, text=f'{column}').grid(row=0, column=idx)
             
         for row, row_contents in enumerate(self.query()):
-            for col, col_contents in enumerate(row_contents):
+            for col, col_contents in enumerate(row_contents[1:]):
                 tk.Label(self.contents, text=f'{col_contents}').grid(row=row+1, column=col)
+            amount_due = self.query_due(row_contents[0])
+            tk.Label(self.contents, text=f'{amount_due:.2f}').grid(row=row+1, column=len(row_contents)-1)
                 
     def query(self):
         self.cursor.execute(f'''
-            SELECT order_date, agent_info.name, customer_info.name, order_id, amount_due
+            SELECT order_id, order_date, agent_info.name, customer_info.name, order_id
               FROM orders
                    JOIN customer
                      ON customer.customer_id = orders.customer_id
@@ -57,6 +59,16 @@ class AgentTransactions(tk.Frame):
                AND order_date < DATE '{self.datetime.year}-{self.datetime.month}-1' + INTERVAL '1 month';
         ''')
         return self.cursor.fetchall()
+
+    def query_due(self, order_id):
+        self.cursor.execute(f'''
+            SELECT product.price-product.price*discount*0.01
+              FROM ordered_product
+                   JOIN product
+                     ON product.product_id = ordered_product.product_id
+             WHERE order_id = {order_id};
+        ''')
+        return float(self.cursor.fetchall()[0][0])
 
     def pack(self):
         super().pack()

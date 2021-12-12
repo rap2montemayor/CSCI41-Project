@@ -31,11 +31,26 @@ class OrdersDeliveries(tk.Frame):
     def populate(self):
         for widget in self.contents.winfo_children():
             widget.destroy()
-
+        
         order_id = self.orders[self.current_order]
         order_info = tk.Frame(self.contents)
+
+        products_info = tk.Frame(self.contents)
+        products = self.query_products(order_id)
+        for idx, column in enumerate(['Item', 'Description', 'Qty', 'SRP', 'Discount', 'Total']):
+            tk.Label(products_info, text=column).grid(row=0, column=idx)
+
+        amount_due = 0
+        for row, row_contents in enumerate(self.query_products(order_id)):
+            product, color, personalization, qty, srp, discount, total = row_contents
+            description = f'Color: {color}\nPersonalization: {personalization}'
+            amount_due += float(total)
+            for col, col_contents in enumerate([product, description, qty, srp, discount, f'{float(total):.2f}']):
+                tk.Label(products_info, text=f'{col_contents}').grid(row=row+1, column=col)
+
+
         recipients = '/'.join(self.query_recipients(order_id))
-        customer, address, schedule, gift, date, agent, due = self.query_order(order_id)
+        customer, address, schedule, gift, date, agent = self.query_order(order_id)
         tk.Label(order_info, text=f'Customer: {customer}').grid(row=0, column=0)
         tk.Label(order_info, text=f'Delivery Address: {address}').grid(row=1, column=0)
         tk.Label(order_info, text=f'Schedule: {schedule}').grid(row=2, column=0)
@@ -44,24 +59,14 @@ class OrdersDeliveries(tk.Frame):
         tk.Label(order_info, text=f'Order No.: {order_id}').grid(row=0, column=1)
         tk.Label(order_info, text=f'Date: {date}').grid(row=1, column=1)
         tk.Label(order_info, text=f'Agent: {agent}').grid(row=2, column=1)
-        tk.Label(order_info, text=f'Amount Due: {due}').grid(row=3, column=1)
+        tk.Label(order_info, text=f'Amount Due: {amount_due:.2f}').grid(row=3, column=1)
+
         order_info.pack()
-
-        products_info = tk.Frame(self.contents)
-        products = self.query_products(order_id)
-        for idx, column in enumerate(['Item', 'Description', 'Qty', 'SRP', 'Discount', 'Total']):
-            tk.Label(products_info, text=column).grid(row=0, column=idx)
-
-        for row, row_contents in enumerate(self.query_products(order_id)):
-            product, color, personalization, qty, srp, discount, total = row_contents
-            description = f'Color: {color}\nPersonalization: {personalization}'
-            for col, col_contents in enumerate([product, description, qty, srp, discount, total]):
-                tk.Label(products_info, text=f'{col_contents}').grid(row=row+1, column=col)
         products_info.pack()
 
     def query_order(self, order_id):
         self.cursor.execute(f'''
-            SELECT customer_info.name, delivery_address, schedule, gift, order_date, agent_info.name, amount_due
+            SELECT customer_info.name, delivery_address, schedule, gift, order_date, agent_info.name
               FROM orders
                    JOIN customer
                      ON customer.customer_id = orders.customer_id
