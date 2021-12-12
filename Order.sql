@@ -5,11 +5,11 @@ CREATE TABLE orders (
     order_id         INT            NOT NULL,
     agent_id         INT            NOT NULL,
     customer_id      INT            NOT NULL,
-    amount_due       NUMERIC(19, 2) NOT NULL DEFAULT 0,
+    amount_due       NUMERIC(16, 2) NOT NULL, -- derived; consider deleting
+    delivery_address VARCHAR(127)   NOT NULL,
+    gift             BOOLEAN        NOT NULL DEFAULT FALSE,
     order_date       DATE           NOT NULL,
-    schedule         DATE           NOT NULL,
-    delivery_address VARCHAR(255)   NOT NULL DEFAULT ' ',
-    gift             BOOLEAN        NOT NULL
+    schedule         DATE           NOT NULL
 );
 
 CREATE TABLE ordered_product (
@@ -17,10 +17,12 @@ CREATE TABLE ordered_product (
     FOREIGN KEY (product_id) REFERENCES product(product_id),
     order_id        INT          NOT NULL,
     product_id      INT          NOT NULL,
+    color           VARCHAR(127) NOT NULL,
     discount        INT          NOT NULL DEFAULT 0,
-    personalization VARCHAR(255) NOT NULL,
-    color           VARCHAR(255) NOT NULL,
-    quantity        INT          NOT NULL DEFAULT 0
+    personalization VARCHAR(127) NOT NULL DEFAULT '',
+    quantity        INT          NOT NULL DEFAULT 1,
+    CHECK (color IN ('red', 'orange', 'yellow', 'green',
+                     'blue', 'purple', 'pink', 'black'))
 );
 
 CREATE TABLE order_recipient (
