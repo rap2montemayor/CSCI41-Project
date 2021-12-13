@@ -105,13 +105,21 @@ VALUES (4001, 'mjolnir'),
        (4011, 'optional sleeve (+185)')
 
 INSERT INTO product_pen_organizers (product_id, slots)
-VALUES (4003, 5);
+VALUES (4003, 5),
+       (4007, 6),
+       (4008, 15),
+       (4009, 4);
 
 INSERT INTO product_folders (product_id, height, length, width)
-VALUES (4002, 10, 4, 20);
+VALUES (4002, 10, 4, 20),
+       (4004, 13.5, 10.25, 0.75),
+       (4005, 14, 11, 1.5),
+       (4006, 14, 11.5, 1);
 
 INSERT INTO product_planners (product_id, height, length, width)
-VALUES (4001, 9, 8, 7);
+VALUES (4001, 9, 8, 7),
+       (4010, 8, 6, 0.75),
+       (4011, 8.5, 6, 0.75);
 
 INSERT INTO product_color_stock (product_id, color, stock)
 VALUES (4001, 'red', 3),
@@ -151,14 +159,18 @@ VALUES (4001, 'red', 3),
 INSERT INTO orders (order_id, agent_id, customer_id, order_date, schedule, delivery_address, gift)
 VALUES (5001, 2001, 3002, '2021-12-12', '2022-1-4', 'Windrise Tree', false),
        (5002, 2004, 3008, '2021-12-12', '2022-1-10', 'Loyola Heights', false),
-       (5003, 2004, 3010, '2021-12-13', '2022-1-11', 'Summoners Rift', true);
+       (5003, 2004, 3010, '2021-12-13', '2022-1-11', 'Summoners Rift', true),
+       (5004, 2005, 3012, '2025-2-1', '2025-2-10', 'North Point, Dewpeak', false);
 
 INSERT INTO ordered_product (order_id, product_id, discount, personalization, color, quantity)
 VALUES (5001, 4002, 0, 'XxBarbatosxX', 'blue', 1),
        (5002, 4003, 0, 'Cloud_Strife', 'red', 1),
-       (5003, 4001, 0, 'Vi', 'pink', 3);
+       (5003, 4001, 0, 'Vi', 'pink', 3),
+       (5004, 4006, 0, '(none)', 'blue', 1),
+       (5006, 4007, 0.10, 'Tasi', 'orange', 1);
 
 INSERT INTO order_recipient (order_id, person_id)
 VALUES (5001, 1002),
        (5002, 1007),
-       (5003, 1003);
+       (5003, 1003),
+       (5004, 1009);
