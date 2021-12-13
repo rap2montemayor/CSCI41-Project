@@ -5,7 +5,13 @@ VALUES (1001, 'Diluc Ragnvindr'),
        (1004, 'Maria Ressa'),
        (1005, 'Osana Azuma'),
        (1006, 'Hoh Lee'),
-       (1007, 'Yoshi P.');
+       (1007, 'Yoshi P.'),
+       (1008, 'Axis Snowdrop'),
+       (1009, 'Ashley Pinefall'),
+       (1010, 'Nelly Khitsu'),
+       (1011, 'Carrie Itson'),
+       (1012, 'Elliot Rainydew'),
+       (1013, 'Badger Ramoh');
 
 INSERT INTO agent (agent_id, person_id, customer_count)
 VALUES (2001, 1001, 0),
@@ -35,21 +41,19 @@ VALUES (4001, 'planners', 'yung ninakaw na notebook ni albedo', 30, 12345),
        (4009, 'pen organizers', 'wrapper', 6, 345),
        (4010, 'planners', 'doodler', 8, 595),
        (4011, 'planners', 'scribbler', 8, 595);
-       
+
 
 INSERT INTO product_features (product_id, feature)
-VALUES (4001, 'reversible'),
-       (4001, 'slim and compact'),
-       (4001, 'leatherette material'),
-       (4001, 'magnetic corners'),
-       (4001, 'magnetic clipboard'),
-       (4001, 'envelope pocket'),
-       (4001, 'pen loop (2)'),
-
+VALUES (4001, 'mjolnir'),
        (4002, 'venti sadboi vibes'),
        (4002, 'may kasamang paboritong kanta ni barbara'),
        (4002, 'pampatulog ni xiao'),
-       (4003, 'may kasamang pencil sharpener');
+       (4003, 'may kasamang pencil sharpener'),
+       (4004, 'reversible'),
+       (4004, 'slim and compact'),
+       (4004, 'leatherette material'),
+       (4004, 'magnetic corners'),
+       (4004, )
 
 INSERT INTO product_pen_organizers (product_id, slots)
 VALUES (4003, 5);
