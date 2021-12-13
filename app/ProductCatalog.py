@@ -52,7 +52,7 @@ class ProductCatalog(tk.Frame):
 
         for row, row_contents in enumerate(self.query_products(category)):
             product_id, item, personalization, price = row_contents
-            features = '\n-'.join(self.query_features(product_id))
+            features = '\n'.join(self.query_features(product_id))
             extra = extra_query[category](product_id)
 
             columns = [item, features, extra, personalization, price]
