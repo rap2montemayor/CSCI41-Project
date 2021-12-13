@@ -69,4 +69,4 @@ VALUES (5001, 4002, 0, 'XxBarbatosxX', 'blue', 1),
 INSERT INTO order_recipient (order_id, person_id)
 VALUES (5001, 1002),
        (5002, 1007),
-       (5003, 1002);
+       (5003, 1003);
