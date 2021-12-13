@@ -26,11 +26,26 @@ VALUES (3002, 2001, 1002),
 INSERT INTO product (product_id, category, name, personalization_limit, price)
 VALUES (4001, 'planners', 'yung ninakaw na notebook ni albedo', 30, 12345),
        (4002, 'folders', 'mga harana ni venti', 32, 31415),
-       (4003, 'pen organizers', 'pencil case ni xinqiu', 32, 12345);
+       (4003, 'pen organizers', 'pencil case ni xinqiu', 32, 12345),
+       (4004, 'folders', 'flipper', 8, 745),
+       (4005, 'folders', 'filer', 8, 995),
+       (4006, 'folders', 'keeper', 8, 895),
+       (4007, 'pen organizers', 'slinger', 5, 95),
+       (4008, 'pen orgaonizers', 'shifter', 8, 295),
+       (4009, 'pen organizers', 'wrapper', 6, 345),
+       (4010, 'planners', 'doodler', 8, 595),
+       (4011, 'planners', 'scribbler', 8, 595);
+       
 
 INSERT INTO product_features (product_id, feature)
-VALUES (4001, 'with instructions on how to make another albedo'),
-       (4001, 'includes sketches of sucrose'),
+VALUES (4001, 'reversible'),
+       (4001, 'slim and compact'),
+       (4001, 'leatherette material'),
+       (4001, 'magnetic corners'),
+       (4001, 'magnetic clipboard'),
+       (4001, 'envelope pocket'),
+       (4001, 'pen loop (2)'),
+
        (4002, 'venti sadboi vibes'),
        (4002, 'may kasamang paboritong kanta ni barbara'),
        (4002, 'pampatulog ni xiao'),
