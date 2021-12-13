@@ -102,7 +102,7 @@ VALUES (4001, 'mjolnir'),
        (4011, 'monthly spread'),
        (4011, 'limited notes pages'),
        (4011, 'monthly watercolor artwork'),
-       (4011, 'optional sleeve (+185)')
+       (4011, 'optional sleeve (+185)');
 
 INSERT INTO product_pen_organizers (product_id, slots)
 VALUES (4003, 5),
