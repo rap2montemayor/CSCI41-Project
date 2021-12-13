@@ -17,7 +17,6 @@ class ProductCatalog(tk.Frame):
         tk.Button(self.buttons, text='Next category', command=self.next_categ).grid(row=0, column=1)
 
         self.contents = tk.Frame(self)
-        self.populate()
 
     def next_categ(self):
         self.current_categ = (self.current_categ+1) % len(self.categories)
@@ -106,6 +105,7 @@ class ProductCatalog(tk.Frame):
         self.header.pack()
         self.buttons.pack()
         self.contents.pack()
+        self.populate()
 
     def forget(self):
         super().forget()

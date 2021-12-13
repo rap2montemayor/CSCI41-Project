@@ -11,7 +11,6 @@ class Inventory(tk.Frame):
         self.header_contents.set(f'INVENTORY as of {self.datetime.year}, {self.datetime.month}')
         self.header = tk.Label(self, textvariable=self.header_contents)
         self.contents = tk.Frame(self)
-        self.populate()
 
     def populate(self):
         for widget in self.contents.winfo_children():
@@ -45,6 +44,7 @@ class Inventory(tk.Frame):
         super().pack()
         self.header.pack()
         self.contents.pack()
+        self.populate()
 
     def forget(self):
         super().forget()

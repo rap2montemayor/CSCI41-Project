@@ -18,7 +18,6 @@ class AgentTransactions(tk.Frame):
         tk.Button(self.buttons, text='Next month', command=self.next_month).grid(row=0, column=1)
 
         self.contents = tk.Frame(self)
-        self.populate()
 
     def next_month(self):
         self.datetime = (self.datetime + timedelta(days=32)).replace(day=1)
@@ -72,6 +71,7 @@ class AgentTransactions(tk.Frame):
         self.buttons.pack()
         self.header.pack()
         self.contents.pack()
+        self.populate()
 
     def forget(self):
         super().forget()
