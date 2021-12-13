@@ -20,14 +20,20 @@ VALUES (2001, 1001, 0),
        (2020, 1004, 10),
        (2003, 1005, 0),
        (2030, 1006, 0),
-       (2004, 1007, 15);
+       (2004, 1007, 15),
+       (2005, 1008, 2),
+       (2006, 1010, 2);
 
 INSERT INTO customer (customer_id, agent_id, person_id)
 VALUES (3002, 2001, 1002),
        (3004, 2010, 1004),
        (3006, 2002, 1006),
        (3008, 2004, 1007),
-       (3010, 2004, 1001);
+       (3010, 2004, 1001),
+       (3012, 2005, 1009),
+       (3014, 2005, 1012),
+       (3015, 2006, 1011),
+       (3016, 2006, 1013);
 
 INSERT INTO product (product_id, category, name, personalization_limit, price)
 VALUES (4001, 'planners', 'yung ninakaw na notebook ni albedo', 30, 12345),
@@ -116,7 +122,31 @@ VALUES (4001, 'red', 3),
        (4002, 'purple', 9),
        (4003, 'pink', 2),
        (4003, 'black', 6),
-       (4003, 'red', 8);
+       (4003, 'red', 8),
+       (4007, 'red', 60),
+       (4007, 'orange', 43),
+       (4007, 'yellow', 94),
+       (4007, 'green', 98),
+       (4007, 'blue', 30),
+       (4007, 'purple', 30),
+       (4007, 'pink', 85),
+       (4007, 'black', 88),
+       (4008, 'red', 93),
+       (4008, 'orange', 18),
+       (4008, 'yellow', 84),
+       (4008, 'green', 71),
+       (4008, 'blue', 75),
+       (4008, 'purple', 48),
+       (4008, 'pink', 45),
+       (4008, 'black', 3),
+       (4009, 'red', 50),
+       (4009, 'orange', 11),
+       (4009, 'yellow', 66),
+       (4009, 'green', 25),
+       (4009, 'blue', 21),
+       (4009, 'purple', 79),
+       (4009, 'pink', 54),
+       (4009, 'black', 93);
 
 INSERT INTO orders (order_id, agent_id, customer_id, order_date, schedule, delivery_address, gift)
 VALUES (5001, 2001, 3002, '2021-12-12', '2022-1-4', 'Windrise Tree', false),
