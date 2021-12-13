@@ -17,7 +17,6 @@ class ProductCatalog(tk.Frame):
         tk.Button(self.buttons, text='Next category', command=self.next_categ).grid(row=0, column=1)
 
         self.contents = tk.Frame(self)
-        self.populate()
 
     def next_categ(self):
         self.current_categ = (self.current_categ+1) % len(self.categories)
@@ -53,7 +52,7 @@ class ProductCatalog(tk.Frame):
 
         for row, row_contents in enumerate(self.query_products(category)):
             product_id, item, personalization, price = row_contents
-            features = '\n-'.join(self.query_features(product_id))
+            features = '\n'.join(self.query_features(product_id))
             extra = extra_query[category](product_id)
 
             columns = [item, features, extra, personalization, price]
@@ -106,6 +105,7 @@ class ProductCatalog(tk.Frame):
         self.header.pack()
         self.buttons.pack()
         self.contents.pack()
+        self.populate()
 
     def forget(self):
         super().forget()

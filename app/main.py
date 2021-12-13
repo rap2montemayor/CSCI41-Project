@@ -9,6 +9,7 @@ PASSWORD = ''
 
 def main():
 	conn = psycopg2.connect(host=HOSTNAME, dbname=DATABASE, user=USERNAME, password=PASSWORD)
+	conn.autocommit = True
 	cursor = conn.cursor()
 
 	root = tk.Tk()

@@ -18,8 +18,6 @@ class OrdersDeliveries(tk.Frame):
 
         self.contents = tk.Frame(self)
 
-        self.populate()
-
     def next_order(self):
         self.current_order = (self.current_order+1) % len(self.orders)
         self.populate()
@@ -108,6 +106,7 @@ class OrdersDeliveries(tk.Frame):
         self.header.pack()
         self.buttons.pack()
         self.contents.pack()
+        self.populate()
 
     def forget(self):
         super().forget()
