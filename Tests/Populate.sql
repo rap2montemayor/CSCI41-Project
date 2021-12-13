@@ -43,7 +43,7 @@ VALUES (4001, 'planners', 'yung ninakaw na notebook ni albedo', 30, 12345),
        (4005, 'folders', 'filer', 8, 995),
        (4006, 'folders', 'keeper', 8, 895),
        (4007, 'pen organizers', 'slinger', 5, 95),
-       (4008, 'pen orgaonizers', 'shifter', 8, 295),
+       (4008, 'pen organizers', 'shifter', 8, 295),
        (4009, 'pen organizers', 'wrapper', 6, 345),
        (4010, 'planners', 'doodler', 8, 595),
        (4011, 'planners', 'scribbler', 8, 595);
@@ -160,17 +160,20 @@ INSERT INTO orders (order_id, agent_id, customer_id, order_date, schedule, deliv
 VALUES (5001, 2001, 3002, '2021-12-12', '2022-1-4', 'Windrise Tree', false),
        (5002, 2004, 3008, '2021-12-12', '2022-1-10', 'Loyola Heights', false),
        (5003, 2004, 3010, '2021-12-13', '2022-1-11', 'Summoners Rift', true),
-       (5004, 2005, 3012, '2025-2-1', '2025-2-10', 'North Point, Dewpeak', false);
+       (5004, 2005, 3012, '2025-2-1', '2025-2-10', 'North Point, Dewpeak', false),
+       (5005, 2006, 3016, '2021-12-14', '2022-1-25', 'Quezon City', true);
 
 INSERT INTO ordered_product (order_id, product_id, discount, personalization, color, quantity)
 VALUES (5001, 4002, 0, 'XxBarbatosxX', 'blue', 1),
        (5002, 4003, 0, 'Cloud_Strife', 'red', 1),
        (5003, 4001, 0, 'Vi', 'pink', 3),
        (5004, 4006, 0, '(none)', 'blue', 1),
-       (5006, 4007, 0.10, 'Tasi', 'orange', 1);
+       (5004, 4007, 0.10, 'Tasi', 'orange', 1),
+       (5005, 4008, 0, 'Victhory', 'blue', 1);
 
 INSERT INTO order_recipient (order_id, person_id)
 VALUES (5001, 1002),
        (5002, 1007),
        (5003, 1003),
-       (5004, 1009);
+       (5004, 1009),
+       (5005, 1013);
